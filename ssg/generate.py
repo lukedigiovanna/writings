@@ -10,7 +10,7 @@ print(os.getcwd())
 articles_dir = os.path.join(os.getcwd(), 'articles')
 template_dir = os.path.join(os.getcwd(), 'template')
 
-site_dir = os.path.join(os.getcwd(), 'docs')
+site_dir = os.path.join(os.getcwd(), 'site')
 template_dir = os.path.join(os.getcwd(), 'template')
 
 with open(os.path.join(template_dir, "article.html"), "r") as f:
