@@ -1,5 +1,3 @@
-# Implementing a WebSocket Server in C
-
 The WebSocket standard is useful for persistent two-way communication in web-based environments. This is what enables real time applications in browsers such as chat applications and multiplayer games.
 
 The standard is built on TCP 
