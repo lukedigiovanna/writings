@@ -22,7 +22,13 @@ with open(os.path.join(template_dir, "home.html"), "r") as f:
 if os.path.exists(site_dir):
     shutil.rmtree(site_dir)
 os.makedirs(site_dir)
-shutil.copy(os.path.join(template_dir, "index.css"), os.path.join(site_dir, "index.css"))
+# Loop over all files in the source folder
+for filename in os.listdir(template_dir):
+    file_path = os.path.join(template_dir, filename)
+    # Check if it's a file (not a folder) and not an HTML file
+    if os.path.isfile(file_path) and not filename.lower().endswith(('.html', '.htm')):
+        shutil.copy(file_path, site_dir)
+        print(f"Copied: {filename}")
 
 articles = [] # article is a tuple with title and date
 
@@ -42,7 +48,7 @@ for directory in os.listdir(articles_dir):
     with open(metadata_path, "r") as f:
         metadata = f.read()
         
-    content_html = markdown.markdown(content)
+    content_html = markdown.markdown(content, extensions=['fenced_code'])
     metadata_yaml = yaml.safe_load(metadata)
 
     title = metadata_yaml["title"]

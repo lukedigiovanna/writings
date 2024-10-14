@@ -6,13 +6,15 @@ For more information on the standard, refer to the [RFC 6455](https://datatracke
 
 This article will walk through the development of the simplest implementation of a WebSocket server in C using only Linux system calls (no libraries!)
 
-### HTTP and TCP
+## TCP
 
 To be able to establish a WebSocket connection, we need to be able to handle HTTP requests, which is just a protocol built on top of TCP. So really the first thing we need to do is set up a server to receive TCP connections.
 
+### Connecting a server
+
 We open a socket to receive connections with the `socket(2)` system call as follows. (Note that I omitted error checking after syscalls here to make the important functionality clear, but it is good practice to always check for return errors when making syscalls).
 
-```
+```c
 // Set up a socket server
 int server_socket_fd;
 struct sockaddr_in server_address;
@@ -28,9 +30,11 @@ server_address.sin_addr.s_addr = htonl(INADDR_ANY);
 bind(server_socket_fd, &server_address, sizeof(struct sockaddr_in));
 ```
 
+### Receiving clients
+
 After configuring the server socket, we tell it to 
 
-#### Resources Used
+## Resources Used
 
 [Mozilla's HTTP Overview](https://developer.mozilla.org/en-US/docs/Web/HTTP/Overview)
 

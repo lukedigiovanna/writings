@@ -4,17 +4,27 @@
         <title>
             {title}
         </title>
+        <link href="../index.css" rel="stylesheet" />
+        <link href="../article.css" rel="stylesheet" />
     </head>
     <body>
-        <h1>
-            {title}
-        </h1>
-        <h3>
-            {date}
-        </h3>
-        <hr />
-        <div>
-            {content}
+        <div class="article">
+            <h1 class="title">
+                {title}
+            </h1>
+            <h3 class="byline">
+                <span class="author">
+                    Luke DiGiovanna
+                </span>
+                -
+                <span class="date">
+                    {date}
+                </span>
+            </h3>
+            <hr />
+            <div class="content">
+                {content}
+            </div>
         </div>
     </body>
 </html>
