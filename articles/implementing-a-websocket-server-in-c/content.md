@@ -32,7 +32,45 @@ bind(server_socket_fd, &server_address, sizeof(struct sockaddr_in));
 
 ### Receiving clients
 
-After configuring the server socket, we tell it to 
+After configuring the server socket, we tell it to wait for a client, which opens
+a file descriptor that we can read requests from.
+
+```c
+struct sockaddr client_address;
+socklen_t len;
+int client_fd = accept(server_socket_fd, &client_address, &len);
+```
+
+## HTTP
+
+When we first get a connection from a client, we expect an HTTP request to 
+establish the WebSocket handshake. This section requires an implementation of
+HTTP. I wrote a very basic HTTP server that specifically handles the case of
+setting up a WebSocket, but not much else (i.e. no sending files, handling
+authentication, cookies, JSON, etc.). 
+
+> An alternative to writing your own HTTP implementation is to use a reverse 
+> proxy where you have another server setup to handle HTTP requests and sends 
+> that client to your WebSocket server.
+
+In any case, I will not walk through my HTTP implementation, but it simply
+involves parsing an HTTP request.
+
+### The WebSocket Handshake Request
+
+The handshake must be done before data can be sent back and forth. This request
+usually looks something like:
+
+```
+GET / HTTP/1.1
+Host: 127.0.0.1:8080
+Upgrade: websocket
+Connection: Upgrade
+Sec-WebSocket-Key: dGVzdF9rZXk=
+Sec-WebSocket-Version: 13
+```
+
+The most important header here is `Sec-WebSocket-Key`
 
 ## Resources Used
 

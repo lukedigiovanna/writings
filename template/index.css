@@ -6,3 +6,9 @@
 body {
     font-family: Alegreya;
 }
+
+.home {
+    max-width: 800px;
+    display: block;
+    margin-inline: auto;
+}
