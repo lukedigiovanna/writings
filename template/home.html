@@ -7,16 +7,27 @@
         <link rel="stylesheet" href="index.css" />
     </head>
     <body>
-        <div class="home">
-            <h1>
-                Here are some of my writings.
+        <div class="navbar">
+            <h1 class="name">
+                Luke's Writings
             </h1>
+            <div class="navbuttons">
+                <a href="/articles" class="navbutton">
+                    Archive
+                </a>
+                <a href="/tags" class="navbutton">
+                    Tags
+                </a>
+            </div>
+        </div>
+        <div class="home">
             <h3>
                 Checkout my Github <a href="https://github.com/lukedigiovanna">lukedigiovanna</a>
             </h3>
             <div>
                 {article_list}
             </div>
+            
         </div>
     </body>
 </html>

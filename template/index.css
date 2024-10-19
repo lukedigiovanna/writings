@@ -5,10 +5,37 @@
 
 body {
     font-family: Alegreya;
+    background-color: #f3f3f5;
 }
 
 .home {
     max-width: 800px;
     display: block;
     margin-inline: auto;
+}
+
+.navbar {
+    max-width: 1000px;
+    margin-inline: auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+
+.navbar > .name {
+    font-weight: bolder;
+}
+
+.navbar > .navbuttons {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 15px;
+}
+
+.navbuttons > .navbutton {
+    text-decoration: none;
+    font-weight: bold;
+    color: black;
+    font-size: 22px;
 }
