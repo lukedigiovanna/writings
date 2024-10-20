@@ -58,19 +58,41 @@ involves parsing an HTTP request.
 
 ### The WebSocket Handshake Request
 
-The handshake must be done before data can be sent back and forth. This request
-usually looks something like:
+The handshake must be done before data can be sent back and forth. The purpose of this handshake is for the server to prove to the client that it supports the WebSocket protocol. This is done with an HTTP request that usually looks something like:
 
 ```
 GET / HTTP/1.1
-Host: 127.0.0.1:8080
+Host: https://my-site.com
 Upgrade: websocket
 Connection: Upgrade
 Sec-WebSocket-Key: dGVzdF9rZXk=
 Sec-WebSocket-Version: 13
 ```
 
-The most important header here is `Sec-WebSocket-Key`
+The most important header here is `Sec-WebSocket-Key`. The client sends this
+for the server to prove to the client that it supports the WebSocket protocol.
+This process works as follows:
+
+1. The server appends the GUID `"258EAFA5-E914-47DA-95CA-C5AB0DC85B11"` to the provided `Sec-WebSocket-Key`. This GUID was chosen as the standard since it is "unlikely to be used by network endpoints that do not understand the WebSocket protocol"
+2. Then hashes this string using SHA-1 (note the weak cryptographic security of SHA-1 is not a concern as this is primarily done just as part of the protocol, not to protect sensitive data)
+3. Then base64 encodes this hash.
+
+Then the server sends an HTTP response back to the client with the `101 Switching Protocols` status code and the result of the above process in the `Sec-WebSocket-Accept` header.
+
+This response may look something like:
+
+```
+HTTP/1.1 101 Switching Protocols
+Sec-WebSocket-Accept: s3pPLMBiTxaQ9kYGzzhZRbK+xOr=
+Connection: Upgrade
+Upgrade: websocket
+```
+
+Upon receipt, the client knows that it can start sending and receiving WebSocket frames from this server.
+
+## WebSocket Duplex Communication
+
+The WebSocket protocol uses the concept of frames to send messages 
 
 ## Resources Used
 
