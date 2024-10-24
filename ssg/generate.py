@@ -11,17 +11,24 @@ articles_dir = os.path.join(os.getcwd(), 'articles')
 template_dir = os.path.join(os.getcwd(), 'template')
 
 site_dir = os.path.join(os.getcwd(), 'site')
+writings_dir = os.path.join(site_dir, 'writings')
+
 template_dir = os.path.join(os.getcwd(), 'template')
 
-with open(os.path.join(template_dir, "article.html"), "r") as f:
-    article_template = f.read()
-with open(os.path.join(template_dir, "home.html"), "r") as f:
-    home_template = f.read()
+def read_template(name):
+    with open(os.path.join(template_dir, name), "r") as f:
+        return f.read()
+
+article_template = read_template("article.html")
+home_template = read_template("home.html")
+tags_template = read_template("tags.html")
+archive_template = read_template("archive.html")
 
 # make/clear site folder
 if os.path.exists(site_dir):
     shutil.rmtree(site_dir)
 os.makedirs(site_dir)
+os.makedirs(writings_dir)
 # Loop over all files in the source folder
 for filename in os.listdir(template_dir):
     file_path = os.path.join(template_dir, filename)
@@ -60,7 +67,7 @@ for directory in os.listdir(articles_dir):
                            .replace("{content}", content_html)
 
     # make a directory in the site with the same content
-    site_article_dir = os.path.join(site_dir, directory)
+    site_article_dir = os.path.join(writings_dir, directory)
     os.makedirs(site_article_dir)
     with open(os.path.join(site_article_dir, "index.html"), "w") as f:
         f.write(html)
@@ -69,7 +76,7 @@ for directory in os.listdir(articles_dir):
 
 # Generates the HTML for the article link
 def make_article_link(article):
-    return f'<li><a href="{directory}">{article[1]}</a></li>'
+    return f'<li><a href="/writings/{article[0]}">{article[1]}</a></li>'
 
 def make_articles_list(articles):
     content = "<ul>"
@@ -78,7 +85,17 @@ def make_articles_list(articles):
     content += "</ul>"
     return content
 
-index_html = home_template.replace("{article_list}", make_articles_list(articles))
+def write_index_html(path, content):
+    full_path = os.path.join(site_dir, path)
+    if not os.path.exists(full_path):
+        os.makedirs(full_path)
+    with open(os.path.join(full_path, "index.html"), "w") as f:
+        f.write(content)
 
-with open(os.path.join(site_dir, "index.html"), "w") as f:
-    f.write(index_html)
+index_html = home_template.replace("{article_list}", make_articles_list(articles))
+archive_html = archive_template
+tags_html = tags_template
+
+write_index_html("./", index_html)
+write_index_html("./archive", archive_html)
+write_index_html("./tags", tags_html)
