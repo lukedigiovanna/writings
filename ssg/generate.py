@@ -38,6 +38,7 @@ for filename in os.listdir(template_dir):
         print(f"Copied: {filename}")
 
 articles = [] # article is a tuple with title and date
+all_tags = set()
 
 for directory in os.listdir(articles_dir):
     # look for content.md
@@ -60,6 +61,10 @@ for directory in os.listdir(articles_dir):
 
     title = metadata_yaml["title"]
     date = metadata_yaml["date"]
+    tags = metadata_yaml["tags"]
+
+    for t in tags:
+        all_tags.add(t)
 
     # Replace article with proper content
     html = article_template.replace("{title}", title) \
@@ -85,6 +90,15 @@ def make_articles_list(articles):
     content += "</ul>"
     return content
 
+def make_tag_link(tag):
+    return f'<a href="/" class="tag-button">{tag}</a>'
+
+def make_tags_list(tags):
+    content = ""
+    for tag in tags:
+        content += make_tag_link(tag)
+    return content
+
 def write_index_html(path, content):
     full_path = os.path.join(site_dir, path)
     if not os.path.exists(full_path):
@@ -94,7 +108,7 @@ def write_index_html(path, content):
 
 index_html = home_template.replace("{article_list}", make_articles_list(articles))
 archive_html = archive_template
-tags_html = tags_template
+tags_html = tags_template.replace("{tags}", make_tags_list(all_tags))
 
 write_index_html("./", index_html)
 write_index_html("./archive", archive_html)
