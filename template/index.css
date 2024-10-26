@@ -67,3 +67,19 @@ body {
     font-family: sans-serif;
     text-decoration: none;
 }
+
+.article-block {
+    border: 1px solid black;
+    border-radius: 8px;
+    padding: 12px;
+    margin-block: 7px;
+}
+
+.article-block > a {
+    text-decoration: none;
+    color: #111;
+}
+
+.article-block-content > * {
+    margin: 0;
+}

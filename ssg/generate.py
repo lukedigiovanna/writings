@@ -77,11 +77,19 @@ for directory in os.listdir(articles_dir):
     with open(os.path.join(site_article_dir, "index.html"), "w") as f:
         f.write(html)
 
-    articles.append((directory, metadata_yaml["title"], metadata_yaml["date"]))
+    articles.append((directory, title, date, tags, content))
 
 # Generates the HTML for the article link
 def make_article_link(article):
-    return f'<li><a href="/writings/{article[0]}">{article[1]}</a></li>'
+    directory, title, date, tags, content = article
+    return f'<div class="article-block"> \
+                <a href="/writings/{directory}"> \
+                    <div class="article-block-content"> \
+                        <h1> {title} </h1> \
+                        <p> {content[:300]} </p> \
+                    </div> \
+                </a> \
+            </div>'
 
 def make_articles_list(articles):
     content = "<ul>"
