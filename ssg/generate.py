@@ -86,6 +86,7 @@ def make_article_link(article):
                 <a href="/writings/{directory}"> \
                     <div class="article-block-content"> \
                         <h1> {title} </h1> \
+                        <h4> {date} </h4> \
                         <p> {content[:300]} </p> \
                     </div> \
                 </a> \
