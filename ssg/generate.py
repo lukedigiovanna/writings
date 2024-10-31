@@ -15,9 +15,11 @@ writings_dir = os.path.join(site_dir, 'writings')
 
 template_dir = os.path.join(os.getcwd(), 'template')
 
+base_url = "/writings"
+
 def read_template(name):
     with open(os.path.join(template_dir, name), "r") as f:
-        return f.read()
+        return f.read().replace("{base_url}", base_url)
 
 article_template = read_template("article.html")
 home_template = read_template("home.html")
