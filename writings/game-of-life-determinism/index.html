@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>
+            Lessons in Determinism from the Game of Life
+        </title>
+        <link href="../../index.css" rel="stylesheet" />
+        <link href="../../article.css" rel="stylesheet" />
+    </head>
+    <body>
+        <div class="navbar">
+            <a class="name navbutton" href="/">
+                Luke's Writings
+            </a>
+            <div class="navbuttons">
+                <a href="/writings/archive" class="navbutton">
+                    Archive
+                </a>
+                <a href="/writings/tags" class="navbutton">
+                    Tags
+                </a>
+            </div>
+        </div>
+        <div class="article">
+            <h1 class="title">
+                Lessons in Determinism from the Game of Life
+            </h1>
+            <h3 class="byline">
+                <span class="author">
+                    Luke DiGiovanna
+                </span>
+                -
+                <span class="date">
+                    11/13/2024
+                </span>
+            </h3>
+            <hr />
+            <div class="content">
+                <p>Conway's Game of Life is a classic cellular automaton invented by the namesake mathematician John Conway in 1970. A flat, binary universe is spawned equipped with a handful of physical laws that dictate how the universe morphs from one moment of time to the next. We start by defining each cell to be dead (0) or alive (1). The  </p>
+<h1>The Universe</h1>
+<canvas id="game-of-life" width="332" height="332" style="display: block; margin: auto; border-radius: 4px;">
+<div>
+<button> &gt </button>
+<button> &lt </button>
+</div>
+<script>
+const canvas = document.getElementById("game-of-life");
+const ctx = canvas.getContext("2d");
+const cellSize = 30;
+const p = 1;
+const o = 1;
+ctx.fillStyle="black";
+ctx.fillRect(0,0,canvas.width,canvas.height);
+ctx.fillStyle="white";
+for (let x = 0; x < canvas.width; x += cellSize) {
+    for (let y = 0; y < canvas.height; y += cellSize) {
+        ctx.fillRect(x + o + p, y + o + p, cellSize - 2 * p, cellSize - 2 * p);
+    }
+}
+</script>
+            </div>
+        </div>
+    </body>
+</html>
