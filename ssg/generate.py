@@ -7,13 +7,13 @@ import yaml
 
 print(os.getcwd())
 
-base_url = "writings"
+base_url = "/writings"
 writings_url = "articles"
 
 articles_dir = os.path.join(os.getcwd(), 'articles')
 template_dir = os.path.join(os.getcwd(), 'template')
 
-site_dir = os.path.join(os.getcwd(), 'site')
+site_dir = os.path.join(os.getcwd(), 'writings')
 writings_dir = os.path.join(site_dir, writings_url)
 
 template_dir = os.path.join(os.getcwd(), 'template')
