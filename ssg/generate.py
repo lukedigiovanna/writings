@@ -7,15 +7,17 @@ import yaml
 
 print(os.getcwd())
 
+base_url = "writings"
+writings_url = "articles"
+
 articles_dir = os.path.join(os.getcwd(), 'articles')
 template_dir = os.path.join(os.getcwd(), 'template')
 
 site_dir = os.path.join(os.getcwd(), 'site')
-writings_dir = os.path.join(site_dir, 'writings')
+writings_dir = os.path.join(site_dir, writings_url)
 
 template_dir = os.path.join(os.getcwd(), 'template')
 
-base_url = "/writings"
 
 def read_template(name):
     with open(os.path.join(template_dir, name), "r") as f:
@@ -85,7 +87,7 @@ for directory in os.listdir(articles_dir):
 def make_article_link(article):
     directory, title, date, tags, content = article
     return f'<div class="article-block"> \
-                <a href="/writings/{directory}"> \
+                <a href="{base_url}/{writings_url}/{directory}"> \
                     <div class="article-block-content"> \
                         <h1> {title} </h1> \
                         <h4> {date} </h4> \
