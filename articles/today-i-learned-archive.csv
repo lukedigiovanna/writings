@@ -3,3 +3,4 @@
 11/15/2024: OCaml has a built-in optional type to return Some value or None. Pretty basic, but I'm brand new to OCaml. I've always preferred not to use try/catch workflows - they are so non-idiomatic to me - but it works well here. Rewriting to exploit options is an eyesore (and doesn't work).
 11/16/2024: Bluesky is a "Public Benefit Corporation" which is a designation indicating their objectives are not just profit but the "benefit of society".
 11/17/2024: the fundamental principle of a zero knowledge proof. Basically one party proves to another that something is true (e.g. x = y) without revealing any information about x or y.
+11/21/2024: a genuine understanding of random variables - in my graph theory course of all places (were doing probabilistic graph theory). I always knew how to use them in statistics classes, but never a real intuition for them as mathematical objects.
